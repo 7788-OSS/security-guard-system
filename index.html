@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>安盾安保 · 保安管理系统</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<svg class="svg-sprite" aria-hidden="true">
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></symbol>
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol>
+  <symbol id="i-route" viewBox="0 0 24 24"><circle cx="6" cy="19" r="2"/><circle cx="18" cy="5" r="2"/><path d="M8 19h5a4 4 0 0 0 4-4V9"/><path d="M6 17V8a3 3 0 0 1 3-3h3"/></symbol>
+  <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></symbol>
+  <symbol id="i-swap" viewBox="0 0 24 24"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/><line x1="3" y1="20" x2="21" y2="20"/></symbol>
+  <symbol id="i-wallet" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="15" rx="2"/><path d="M2 10h20"/><path d="M16 15h2"/></symbol>
+  <symbol id="i-logout" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></symbol>
+  <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></symbol>
+  <symbol id="i-check-square" viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></symbol>
+  <symbol id="i-map" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+  <symbol id="i-bell" viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></symbol>
+  <symbol id="i-chevron" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></symbol>
+  <symbol id="i-location" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></symbol>
+  <symbol id="i-camera" viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></symbol>
+  <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></symbol>
+  <symbol id="i-trend" viewBox="0 0 24 24"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></symbol>
+</svg>
+
+<div class="app-shell">
+  <div class="sidebar-mask" id="sidebarMask"></div>
+  <aside class="sidebar" id="sidebar">
+    <div class="brand">
+      <div class="brand-logo"><svg class="ico"><use href="#i-shield"></use></svg></div>
+      <div class="brand-text">
+        <strong>安盾安保</strong>
+        <span>保安管理系统</span>
+      </div>
+    </div>
+
+    <div class="role-switch">
+      <button class="active" data-action="role" data-role="guard">保安端</button>
+      <button data-action="role" data-role="admin">管理端</button>
+    </div>
+
+    <nav class="nav" id="nav">
+      <div class="nav-group" data-role-group="guard">
+        <div class="nav-label">保安工作台</div>
+        <a class="nav-item active" data-page="dashboard">
+          <svg class="ico"><use href="#i-home"></use></svg><span>工作台</span>
+        </a>
+        <a class="nav-item" data-page="punch">
+          <svg class="ico"><use href="#i-clock"></use></svg><span>打卡中心</span>
+        </a>
+        <a class="nav-item" data-page="patrol">
+          <svg class="ico"><use href="#i-route"></use></svg><span>巡逻打卡</span>
+        </a>
+        <div class="nav-label nav-label-sub">申请与查询</div>
+        <a class="nav-item" data-page="leave">
+          <svg class="ico"><use href="#i-file"></use></svg><span>请假申请</span>
+        </a>
+        <a class="nav-item" data-page="swap">
+          <svg class="ico"><use href="#i-swap"></use></svg><span>调班申请</span>
+        </a>
+        <a class="nav-item" data-page="attendance">
+          <svg class="ico"><use href="#i-chart"></use></svg><span>我的考勤</span>
+        </a>
+        <a class="nav-item" data-page="salary">
+          <svg class="ico"><use href="#i-wallet"></use></svg><span>工资确认</span>
+          <span class="nav-dot" id="salaryNavDot"></span>
+        </a>
+        <a class="nav-item" data-page="resignation">
+          <svg class="ico"><use href="#i-logout"></use></svg><span>离职申请</span>
+        </a>
+      </div>
+
+      <div class="nav-group is-hidden" data-role-group="admin">
+        <div class="nav-label">管理控制台</div>
+        <a class="nav-item" data-page="admin-dashboard">
+          <svg class="ico"><use href="#i-grid"></use></svg><span>管理看板</span>
+        </a>
+        <a class="nav-item" data-page="approvals">
+          <svg class="ico"><use href="#i-check-square"></use></svg><span>审批中心</span>
+          <span class="nav-badge" id="approvalBadge">0</span>
+        </a>
+        <div class="nav-label nav-label-sub">基础配置</div>
+        <a class="nav-item" data-page="projects">
+          <svg class="ico"><use href="#i-map"></use></svg><span>项目与巡逻</span>
+        </a>
+        <a class="nav-item" data-page="staff">
+          <svg class="ico"><use href="#i-users"></use></svg><span>人员管理</span>
+        </a>
+      </div>
+    </nav>
+
+    <div class="side-foot">
+      <div class="side-project">
+        <div class="sp-label"><span class="live-dot"></span>当前值守项目</div>
+        <strong id="sideProjectName">滨江华府</strong>
+        <span id="sideShift">白班 08:00 - 20:00</span>
+      </div>
+      <div class="side-version">安盾安保 · V2.6.0</div>
+    </div>
+  </aside>
+
+  <div class="main">
+    <header class="topbar">
+      <button class="icon-btn menu-btn" data-action="menu" aria-label="菜单">
+        <svg class="ico"><use href="#i-menu"></use></svg>
+      </button>
+      <div class="heading">
+        <h1 id="pageTitle">工作台</h1>
+        <p id="pageSub">集中打卡 · 巡逻 · 考勤 · 薪资一站式处理</p>
+      </div>
+      <div class="top-right">
+        <div class="clock-box">
+          <strong id="liveClock">--:--:--</strong>
+          <span id="liveDate">--</span>
+        </div>
+        <button class="icon-btn bell-btn" data-action="notify" aria-label="通知">
+          <svg class="ico"><use href="#i-bell"></use></svg>
+          <span class="bell-dot"></span>
+        </button>
+        <div class="userbox">
+          <div class="avatar" id="topAvatar">张</div>
+          <div class="user-meta">
+            <strong id="topName">张伟</strong>
+            <span id="topMeta">保安员 · BA-0231</span>
+          </div>
+        </div>
+        <div class="notify-panel" id="notifyPanel">
+          <div class="np-head"><strong>通知</strong><span>3 条未读</span></div>
+          <div class="np-item">
+            <span class="np-icon blue"><svg class="ico"><use href="#i-wallet"></use></svg></span>
+            <div><strong>9 月工资单已生成</strong><p>请在「工资确认」中核对并确认，确认后发放。</p><span>今天 09:12</span></div>
+          </div>
+          <div class="np-item">
+            <span class="np-icon orange"><svg class="ico"><use href="#i-file"></use></svg></span>
+            <div><strong>请假申请待审批</strong><p>你提交的年假申请正在等待项目经理审批。</p><span>昨天 10:36</span></div>
+          </div>
+          <div class="np-item">
+            <span class="np-icon green"><svg class="ico"><use href="#i-route"></use></svg></span>
+            <div><strong>巡逻频次已更新</strong><p>滨江华府巡逻频次为每 2 小时一次，请按轮次打卡。</p><span>10 月 20 日</span></div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="content">
+
+      <!-- ==================== 工作台 ==================== -->
+      <section class="page active" id="page-dashboard">
+        <div class="hero">
+          <div class="hero-deco d1"></div>
+          <div class="hero-deco d2"></div>
+          <div class="hero-inner">
+            <div class="hero-left">
+              <div class="hero-eyebrow">
+                <span class="live-dot light"></span>
+                <span id="heroProject">滨江华府</span>
+                <span class="sep">/</span>
+                <span id="heroShift">白班 08:00 - 20:00</span>
+              </div>
+              <h2 id="heroGreeting">下午好，张伟</h2>
+              <p class="hero-desc">集中打卡时段为 07:30 - 08:30，上班前请到项目岗亭完成打卡；巡逻任务请按项目频次逐点签到。</p>
+              <div class="hero-actions">
+                <button class="btn white" data-action="go" data-page="punch">
+                  <svg class="ico"><use href="#i-clock"></use></svg>上班打卡
+                </button>
+                <button class="btn outline-white" data-action="go" data-page="patrol">
+                  <svg class="ico"><use href="#i-route"></use></svg>巡逻打卡
+                </button>
+              </div>
+            </div>
+            <div class="hero-right">
+              <div class="hero-status">
+                <div>
+                  <span class="hs-label">今日到岗状态</span>
+                  <div class="hs-value" id="heroStatus">未打卡</div>
+                </div>
+                <div class="hs-divider"></div>
+                <div>
+                  <span class="hs-label">下次巡逻</span>
+                  <div class="hs-value sm js-next-patrol">--</div>
+                </div>
+                <div class="hs-foot">
+                  <svg class="ico"><use href="#i-location"></use></svg>
+                  <span>东门岗亭 · 定位范围内</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid stats-4" id="dashStats"></div>
+
+        <div class="grid two-col">
+          <div class="card">
+            <div class="card-head">
+              <div>
+                <h3>今日巡逻</h3>
+                <p class="muted">按项目频次自动生成轮次</p>
+              </div>
+              <button class="link-btn" data-action="go" data-page="patrol">全部轮次<svg class="ico"><use href="#i-chevron"></use></svg></button>
+            </div>
+            <div class="patrol-overview">
+              <div class="ring" id="dashPatrolRing" style="--p:0">
+                <div class="ring-inner">
+                  <strong id="dashPatrolValue">0%</strong>
+                  <span>完成率</span>
+                </div>
+              </div>
+              <div class="patrol-round-mini" id="dashRounds"></div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-head">
+              <div>
+                <h3>待办事项</h3>
+                <p class="muted">需要你处理的申请与提醒</p>
+              </div>
+            </div>
+            <div class="todo-list" id="dashTodos"></div>
+          </div>
+        </div>
+
+        <div class="grid two-col">
+          <div class="card">
+            <div class="card-head">
+              <div>
+                <h3>快捷入口</h3>
+                <p class="muted">保安日常六项业务</p>
+              </div>
+            </div>
+            <div class="quick-grid">
+              <button class="quick-item" data-action="go" data-page="punch">
+                <span class="qi-icon blue"><svg class="ico"><use href="#i-clock"></use></svg></span>
+                <div><strong>打卡</strong><small>上班前集中打卡</small></div>
+                <svg class="ico qi-arrow"><use href="#i-chevron"></use></svg>
+              </button>
+              <button class="quick-item" data-action="go" data-page="leave">
+                <span class="qi-icon purple"><svg class="ico"><use href="#i-file"></use></svg></span>
+                <div><strong>请假</strong><small>提交后可撤回</small></div>
+                <svg class="ico qi-arrow"><use href="#i-chevron"></use></svg>
+              </button>
+              <button class="quick-item" data-action="go" data-page="swap">
+                <span class="qi-icon teal"><svg class="ico"><use href="#i-swap"></use></svg></span>
+                <div><strong>调班</strong><small>与同事互换班次</small></div>
+                <svg class="ico qi-arrow"><use href="#i-chevron"></use></svg>
+              </button>
+              <button class="quick-item" data-action="go" data-page="attendance">
+                <span class="qi-icon orange"><svg class="ico"><use href="#i-chart"></use></svg></span>
+                <div><strong>考勤查询</strong><small>查看每日出勤数据</small></div>
+                <svg class="ico qi-arrow"><use href="#i-chevron"></use></svg>
+              </button>
+              <button class="quick-item" data-action="go" data-page="salary">
+                <span class="qi-icon green"><svg class="ico"><use href="#i-wallet"></use></svg></span>
+                <div><strong>确认工资</strong><small>核对本月工资明细</small></div>
+                <svg class="ico qi-arrow"><use href="#i-chevron"></use></svg>
+              </button>
+              <button class="quick-item" data-action="go" data-page="resignation">
+                <span class="qi-icon red"><svg class="ico"><use href="#i-logout"></use></svg></span>
+                <div><strong>申请离职</strong><small>提交后可撤回</small></div>
+                <svg class="ico qi-arrow"><use href="#i-chevron"></use></svg>
+              </button>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-head">
+              <div>
+                <h3>项目公告</h3>
+                <p class="muted">滨江华府 · 安保队</p>
+              </div>
+              <span class="badge blue">3 条</span>
+            </div>
+            <div class="notice-list">
+              <div class="notice-item">
+                <span class="notice-date"><strong>22</strong><small>OCT</small></span>
+                <div><strong>夜间巡逻加强提醒</strong><p>近期地下车库与消防通道为重点巡查区域，巡逻时务必逐点拍照签到。</p></div>
+              </div>
+              <div class="notice-item">
+                <span class="notice-date"><strong>20</strong><small>OCT</small></span>
+                <div><strong>集中打卡时段调整</strong><p>白班集中打卡时段为 07:30 - 08:30，请提前 10 分钟到达岗亭。</p></div>
+              </div>
+              <div class="notice-item">
+                <span class="notice-date"><strong>18</strong><small>OCT</small></span>
+                <div><strong>工资单确认通知</strong><p>9 月工资单已生成，请于本月 25 日前完成确认，逾期视为无异议。</p></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== 打卡中心 ==================== -->
+      <section class="page" id="page-punch">
+        <div class="grid punch-grid">
+          <div class="card punch-card">
+            <div class="punch-head">
+              <span class="badge" id="punchStatusChip">待打卡</span>
+              <span class="muted">定位已开启</span>
+            </div>
+            <div class="punch-clock" id="punchClock">--:--:--</div>
+            <div class="punch-date" id="punchDate">--</div>
+            <div class="punch-window">
+              <svg class="ico"><use href="#i-clock"></use></svg>
+              <span>集中打卡时段</span>
+              <strong>07:30 - 08:30</strong>
+            </div>
+            <div class="punch-meta">
+              <div><span>项目</span><strong id="punchProject">滨江华府 · 东门岗亭</strong></div>
+              <div><span>班次</span><strong>白班 08:00 - 20:00</strong></div>
+            </div>
+            <div id="punchSuccess"></div>
+            <label class="check-line">
+              <input type="checkbox" id="locCheck">
+              <span>已到达项目岗亭，定位已确认</span>
+            </label>
+            <button class="btn primary btn-block btn-lg" id="punchInBtn" data-action="punch-in">上班打卡</button>
+            <button class="btn ghost btn-block" id="punchOutBtn" data-action="punch-out">下班打卡</button>
+            <p class="hint"><svg class="ico"><use href="#i-info"></use></svg>说明：上班前需在项目岗亭集中打卡；下班打卡后请确认岗位交接完成。</p>
+          </div>
+          <div class="stack">
+            <div class="card">
+              <div class="card-head"><h3>今日打卡记录</h3><span class="badge green" id="punchDayBadge">待打卡</span></div>
+              <div id="punchTodayRecords"></div>
+            </div>
+            <div class="card">
+              <div class="card-head"><h3>近 7 天打卡</h3><span class="muted">含今日</span></div>
+              <div class="week-list" id="punchWeek"></div>
+            </div>
+            <div class="card info-card">
+              <h3><svg class="ico"><use href="#i-info"></use></svg>打卡规则</h3>
+              <ul>
+                <li>白班上班前在项目岗亭集中打卡，时段 07:30 - 08:30。</li>
+                <li>上班打卡晚于 08:00 记为迟到，下班早于 20:00 记为早退。</li>
+                <li>如遇设备异常，请联系项目负责人进行补卡登记。</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== 巡逻打卡 ==================== -->
+      <section class="page" id="page-patrol">
+        <div class="grid patrol-top">
+          <div class="card patrol-hero">
+            <div class="ph-head">
+              <div>
+                <div class="eyebrow">当前项目</div>
+                <h2 id="patrolProjectName">滨江华府</h2>
+                <p id="patrolAddr" class="muted">--</p>
+              </div>
+              <span class="badge blue" id="patrolFreqBadge">每2小时</span>
+            </div>
+            <div class="ph-body">
+              <div class="ring ring-lg" id="patrolRing" style="--p:0">
+                <div class="ring-inner">
+                  <strong id="patrolRingValue">0%</strong>
+                  <span>今日完成</span>
+                </div>
+              </div>
+              <div class="ph-info">
+                <div class="ph-row"><span>巡逻频次</span><strong id="patrolFreqText">--</strong></div>
+                <div class="ph-row"><span>今日轮次</span><strong id="patrolRoundText">--</strong></div>
+                <div class="ph-row"><span>下次巡逻</span><strong class="js-next-patrol">--</strong></div>
+                <div class="ph-note">
+                  <svg class="ico"><use href="#i-info"></use></svg>
+                  <span>巡逻频次由项目经理按项目要求配置，巡逻点需现场逐点签到。</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-head"><h3>巡逻点</h3><span class="muted" id="checkpointCount">--</span></div>
+            <div class="checkpoint-list" id="patrolCheckpoints"></div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-head">
+            <div>
+              <h3>今日巡逻轮次</h3>
+              <p class="muted">按巡逻频次自动生成，逾期未打卡将提醒项目负责人</p>
+            </div>
+            <span class="badge" id="patrolStatusBadge">进行中</span>
+          </div>
+          <div class="round-list" id="patrolRounds"></div>
+        </div>
+      </section>
+
+      <!-- ==================== 请假申请 ==================== -->
+      <section class="page" id="page-leave">
+        <div class="grid two-col wide-left">
+          <div class="card">
+            <div class="card-head">
+              <div><h3>提交请假申请</h3><p class="muted">审批通过后自动同步考勤</p></div>
+            </div>
+            <form id="leaveForm" class="form-grid" novalidate>
+              <div class="field">
+                <label>请假类型 <em>*</em></label>
+                <select name="type" required>
+                  <option value="事假">事假</option>
+                  <option value="病假">病假</option>
+                  <option value="年假">年假</option>
+                  <option value="调休">调休</option>
+                </select>
+              </div>
+              <div class="field">
+                <label>交接人 <em>*</em></label>
+                <select name="handover" required>
+                  <option value="李强">李强 · 滨江华府</option>
+                  <option value="王磊">王磊 · 滨江华府</option>
+                  <option value="陈晨">陈晨 · 滨江华府</option>
+                </select>
+              </div>
+              <div class="field">
+                <label>开始日期 <em>*</em></label>
+                <input type="date" name="start" id="leaveStart" required>
+              </div>
+              <div class="field">
+                <label>结束日期 <em>*</em></label>
+                <input type="date" name="end" id="leaveEnd" required>
+              </div>
+              <div class="field">
+                <label>请假天数</label>
+                <input type="text" id="leaveDays" value="1 天" readonly>
+              </div>
+              <div class="field">
+                <label>联系电话</label>
+                <input type="text" value="138****6621" readonly>
+              </div>
+              <div class="field full">
+                <label>请假事由 <em>*</em></label>
+                <textarea name="reason" rows="3" placeholder="请简要说明请假原因，便于项目负责人安排替班..." required></textarea>
+              </div>
+              <div class="form-actions full">
+                <button type="button" class="btn ghost" data-action="reset-form" data-form="leaveForm">重置</button>
+                <button type="submit" class="btn primary">提交请假申请</button>
+              </div>
+            </form>
+          </div>
+          <div class="stack">
+            <div class="card">
+              <div class="card-head"><h3>本月假期额度</h3><span class="muted">2026 年 10 月</span></div>
+              <div class="quota-list">
+                <div class="quota-item">
+                  <div class="quota-top"><span>年假</span><strong>5 <small>/ 7 天</small></strong></div>
+                  <div class="progress"><span style="width:71%"></span></div>
+                </div>
+                <div class="quota-item">
+                  <div class="quota-top"><span>事假</span><strong>2 <small>/ 5 天</small></strong></div>
+                  <div class="progress"><span style="width:40%"></span></div>
+                </div>
+                <div class="quota-item">
+                  <div class="quota-top"><span>病假</span><strong>1 <small>/ 10 天</small></strong></div>
+                  <div class="progress"><span style="width:10%"></span></div>
+                </div>
+              </div>
+            </div>
+            <div class="card info-card">
+              <h3><svg class="ico"><use href="#i-info"></use></svg>请假说明</h3>
+              <ul>
+                <li>请假需提前提交，并指定同项目交接人。</li>
+                <li>提交后可在记录中撤回，已通过后需联系项目经理。</li>
+                <li>连续请假 3 天以上需项目经理与区域经理双重审批。</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-head"><h3>我的请假记录</h3><span class="muted">待审批的申请可撤回</span></div>
+          <div class="table-wrap" id="leaveRecords"></div>
+        </div>
+      </section>
+
+      <!-- ==================== 调班申请 ==================== -->
+      <section class="page" id="page-swap">
+        <div class="grid two-col wide-left">
+          <div class="card">
+            <div class="card-head">
+              <div><h3>提交调班申请</h3><p class="muted">调班需接班同事确认后，由项目经理审批</p></div>
+            </div>
+            <form id="swapForm" class="form-grid" novalidate>
+              <div class="field">
+                <label>调班日期 <em>*</em></label>
+                <input type="date" name="date" id="swapDate" required>
+              </div>
+              <div class="field">
+                <label>接班同事 <em>*</em></label>
+                <select name="colleague" required>
+                  <option value="李强">李强 · 白班</option>
+                  <option value="王磊">王磊 · 白班</option>
+                  <option value="陈晨">陈晨 · 夜班</option>
+                  <option value="周洋">周洋 · 夜班</option>
+                </select>
+              </div>
+              <div class="field">
+                <label>我的原班次 <em>*</em></label>
+                <select name="fromShift" required>
+                  <option value="白班 08:00-20:00">白班 08:00-20:00</option>
+                  <option value="夜班 20:00-08:00">夜班 20:00-08:00</option>
+                  <option value="中班 12:00-00:00">中班 12:00-00:00</option>
+                </select>
+              </div>
+              <div class="field">
+                <label>对方班次 <em>*</em></label>
+                <select name="toShift" required>
+                  <option value="夜班 20:00-08:00">夜班 20:00-08:00</option>
+                  <option value="白班 08:00-20:00">白班 08:00-20:00</option>
+                  <option value="中班 12:00-00:00">中班 12:00-00:00</option>
+                </select>
+              </div>
+              <div class="field full">
+                <label>调班原因 <em>*</em></label>
+                <textarea name="reason" rows="3" placeholder="请说明调班原因，例如家中有事、就医等..." required></textarea>
+              </div>
+              <div class="form-actions full">
+                <button type="button" class="btn ghost" data-action="reset-form" data-form="swapForm">重置</button>
+                <button type="submit" class="btn primary">提交调班申请</button>
+              </div>
+            </form>
+          </div>
+          <div class="stack">
+            <div class="card">
+              <div class="card-head"><h3>本周排班</h3><span class="muted">滨江华府</span></div>
+              <div class="shift-week" id="shiftWeek"></div>
+            </div>
+            <div class="card info-card">
+              <h3><svg class="ico"><use href="#i-info"></use></svg>调班说明</h3>
+              <ul>
+                <li>调班不改变当月总工时，仅调整当日班次。</li>
+                <li>接班同事需具备对应岗位资质，并经项目经理确认。</li>
+                <li>夜班调班后请保证至少 8 小时休息时间。</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-head"><h3>我的调班记录</h3><span class="muted">待审批的申请可撤回</span></div>
+          <div class="table-wrap" id="swapRecords"></div>
+        </div>
+      </section>
+
+      <!-- ==================== 我的考勤 ==================== -->
+      <section class="page" id="page-attendance">
+        <div class="card">
+          <div class="card-head att-head">
+            <div><h3>考勤查询</h3><p class="muted">选择月份查看每日出勤、巡逻与异常记录</p></div>
+            <div class="month-picker">
+              <input type="month" id="attMonth">
+              <button class="btn ghost small" data-action="att-current">回到本月</button>
+            </div>
+          </div>
+          <div class="mini-stats" id="attStats"></div>
+          <div class="cal-legend">
+            <span><i class="dot green"></i>出勤</span>
+            <span><i class="dot orange"></i>迟到</span>
+            <span><i class="dot red"></i>缺卡</span>
+            <span><i class="dot purple"></i>请假</span>
+            <span><i class="dot gray"></i>轮休</span>
+            <span><i class="dot blue"></i>待打卡</span>
+          </div>
+          <div class="calendar" id="attCalendar"></div>
+        </div>
+        <div class="card">
+          <div class="card-head"><h3>考勤明细</h3><span class="muted" id="attMonthLabel">--</span></div>
+          <div class="table-wrap" id="attTable"></div>
+        </div>
+      </section>
+
+      <!-- ==================== 工资确认 ==================== -->
+      <section class="page" id="page-salary">
+        <div class="grid salary-grid">
+          <div class="card salary-card" id="salarySummary"></div>
+          <div class="card">
+            <div class="card-head"><h3>发放流程</h3><span class="muted">按月结算</span></div>
+            <div class="pay-flow">
+              <div class="pay-step done"><span>1</span><div><strong>考勤核算</strong><small>每月 1 - 5 日</small></div></div>
+              <div class="pay-step done"><span>2</span><div><strong>工资单生成</strong><small>每月 10 日前</small></div></div>
+              <div class="pay-step active"><span>3</span><div><strong>员工确认</strong><small>每月 25 日前完成</small></div></div>
+              <div class="pay-step"><span>4</span><div><strong>银行发放</strong><small>每月 28 日</small></div></div>
+            </div>
+            <div class="pay-note">确认后即视为对本月工资无异议；如有疑问请先提交异议，由人事复核处理。</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-head"><h3>工资明细</h3><span class="badge blue" id="salaryMonthBadge">--</span></div>
+          <div class="table-wrap" id="salaryBreakdown"></div>
+          <div class="salary-actions" id="salaryActions"></div>
+        </div>
+        <div class="card">
+          <div class="card-head"><h3>历史工资</h3><span class="muted">近 4 个月</span></div>
+          <div id="salaryHistory"></div>
+        </div>
+      </section>
+
+      <!-- ==================== 离职申请 ==================== -->
+      <section class="page" id="page-resignation">
+        <div id="resignationStatus"></div>
+        <div class="grid two-col wide-left">
+          <div class="card">
+            <div class="card-head">
+              <div><h3>提交离职申请</h3><p class="muted">提交后可在审批前撤回</p></div>
+            </div>
+            <form id="resignationForm" class="form-grid" novalidate>
+              <div class="field">
+                <label>预计最后工作日 <em>*</em></label>
+                <input type="date" name="lastDay" id="resignLastDay" required>
+              </div>
+              <div class="field">
+                <label>离职原因 <em>*</em></label>
+                <select name="reason" required>
+                  <option value="个人原因">个人原因</option>
+                  <option value="家庭原因">家庭原因</option>
+                  <option value="薪资待遇">薪资待遇</option>
+                  <option value="工作环境">工作环境</option>
+                  <option value="职业发展">职业发展</option>
+                  <option value="其他">其他</option>
+                </select>
+              </div>
+              <div class="field">
+                <label>工作交接人 <em>*</em></label>
+                <select name="handover" required>
+                  <option value="李强">李强 · 滨江华府</option>
+                  <option value="王磊">王磊 · 滨江华府</option>
+                  <option value="陈晨">陈晨 · 滨江华府</option>
+                </select>
+              </div>
+              <div class="field">
+                <label>联系电话</label>
+                <input type="text" value="138****6621" readonly>
+              </div>
+              <div class="field full">
+                <label>离职说明 <em>*</em></label>
+                <textarea name="note" rows="3" placeholder="请说明离职原因及工作交接安排..." required></textarea>
+              </div>
+              <label class="check-line full">
+                <input type="checkbox" name="ack" required>
+                <span>我已阅读离职须知，并确认将配合完成岗位与装备交接</span>
+              </label>
+              <div class="form-actions full">
+                <button type="button" class="btn ghost" data-action="reset-form" data-form="resignationForm">重置</button>
+                <button type="submit" class="btn danger-solid">提交离职申请</button>
+              </div>
+            </form>
+          </div>
+          <div class="stack">
+            <div class="card">
+              <div class="card-head"><h3>离职流程</h3><span class="muted">共 4 步</span></div>
+              <div class="flow-list">
+                <div class="flow-item"><span>1</span><div><strong>提交离职申请</strong><small>填写预计最后工作日与交接人</small></div></div>
+                <div class="flow-item"><span>2</span><div><strong>项目审批</strong><small>项目经理确认排班与人员安排</small></div></div>
+                <div class="flow-item"><span>3</span><div><strong>工作交接</strong><small>交接岗位、装备与巡逻记录</small></div></div>
+                <div class="flow-item"><span>4</span><div><strong>办理离职</strong><small>结算工资、退还工牌与制服</small></div></div>
+              </div>
+            </div>
+            <div class="card info-card">
+              <h3><svg class="ico"><use href="#i-alert"></use></svg>温馨提醒</h3>
+              <ul>
+                <li>提交后如未审批，可在记录中直接撤回。</li>
+                <li>离职前需完成全部巡逻与岗位交接，避免考勤异常。</li>
+                <li>工资按实际出勤结算，于次月发放日统一发放。</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-head"><h3>我的离职记录</h3><span class="muted">暂无记录时为空</span></div>
+          <div class="table-wrap" id="resignationRecords"></div>
+        </div>
+      </section>
+
+      <!-- ==================== 管理看板 ==================== -->
+      <section class="page" id="page-admin-dashboard">
+        <div class="grid stats-4" id="adminStats"></div>
+        <div class="grid two-col">
+          <div class="card">
+            <div class="card-head">
+              <div><h3>项目打卡概览</h3><p class="muted">今日各项目到岗情况</p></div>
+              <button class="link-btn" data-action="go" data-page="projects">项目配置<svg class="ico"><use href="#i-chevron"></use></svg></button>
+            </div>
+            <div class="table-wrap" id="adminProjectTable"></div>
+          </div>
+          <div class="card">
+            <div class="card-head">
+              <div><h3>待审批事项</h3><p class="muted">按提交时间排序</p></div>
+              <button class="link-btn" data-action="go" data-page="approvals">全部审批<svg class="ico"><use href="#i-chevron"></use></svg></button>
+            </div>
+            <div class="pending-list" id="adminPending"></div>
+          </div>
+        </div>
+        <div class="grid two-col">
+          <div class="card">
+            <div class="card-head"><h3>本周打卡率</h3><span class="muted">全项目平均</span></div>
+            <div class="bar-chart" id="adminChart"></div>
+          </div>
+          <div class="card">
+            <div class="card-head"><h3>项目巡逻达标</h3><span class="muted">今日</span></div>
+            <div class="project-rate-list" id="adminPatrolRates"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== 审批中心 ==================== -->
+      <section class="page" id="page-approvals">
+        <div class="card">
+          <div class="card-head">
+            <div><h3>审批中心</h3><p class="muted">请假、调班、离职与工资异议统一处理</p></div>
+            <span class="badge orange" id="approvalTotalBadge">0 条待处理</span>
+          </div>
+          <div class="tabs" id="approvalTabs"></div>
+          <div id="approvalList"></div>
+        </div>
+      </section>
+
+      <!-- ==================== 项目与巡逻 ==================== -->
+      <section class="page" id="page-projects">
+        <div class="card">
+          <div class="card-head">
+            <div><h3>项目巡逻配置</h3><p class="muted">不同项目可设置不同的巡逻频次，保存后即时生效</p></div>
+            <span class="badge blue">5 个项目</span>
+          </div>
+          <div class="table-wrap" id="projectTable"></div>
+        </div>
+        <div class="card">
+          <div class="card-head"><h3>巡逻频次说明</h3><span class="muted">按项目实际需求配置</span></div>
+          <div class="freq-grid">
+            <div class="freq-card"><span class="badge purple">每半天</span><strong>2 轮 / 班</strong><p>适用于低风险园区、办公楼，重点时段巡查。</p></div>
+            <div class="freq-card"><span class="badge blue">每 4 小时</span><strong>3 轮 / 班</strong><p>适用于工业园、仓储区等封闭管理项目。</p></div>
+            <div class="freq-card"><span class="badge teal">每 2 小时</span><strong>6 轮 / 班</strong><p>适用于住宅小区、商业综合体常规巡查。</p></div>
+            <div class="freq-card"><span class="badge orange">每 1 小时</span><strong>12 轮 / 班</strong><p>适用于高安防要求项目、重点设施值守。</p></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== 人员管理 ==================== -->
+      <section class="page" id="page-staff">
+        <div class="card">
+          <div class="card-head">
+            <div><h3>人员管理</h3><p class="muted">查看各项目保安今日到岗与巡逻完成情况</p></div>
+            <div class="search-box">
+              <svg class="ico"><use href="#i-search"></use></svg>
+              <input type="text" id="staffSearch" placeholder="搜索姓名 / 工号 / 项目">
+            </div>
+          </div>
+          <div class="table-wrap" id="staffTable"></div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<div id="modalRoot"></div>
+<div id="toastRoot"></div>
+
+<script src="app.js"></script>
+</body>
+</html>

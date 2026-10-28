@@ -1,0 +1,16 @@
+{
+  "name": "security-guard-system",
+  "version": "1.0.0",
+  "private": true,
+  "description": "安盾安保 · 保安管理系统（Node HTTP API + MySQL + 原生前端）",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "mysql2": "^3.24.6"
+  }
+}
