@@ -25,7 +25,7 @@ const pool = mysql.createPool({
   waitForConnections: true,
   connectionLimit: 10,
   // 云数据库（如 TiDB Cloud / Aiven）通常要求 TLS，本地 MySQL 不需要
-  ...(process.env.MYSQL_SSL === '1' ? { ssl: { minVersion: 'TLSv1.2' } } : {})
+  ...(process.env.MYSQL_SSL === '1' ? { ssl: { minVersion: 'TLSv1.2', rejectUnauthorized: false } } : {})
 });
 
 /* ==================== 基础工具 ==================== */
